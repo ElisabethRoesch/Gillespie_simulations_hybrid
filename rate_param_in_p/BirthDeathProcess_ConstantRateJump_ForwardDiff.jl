@@ -27,7 +27,7 @@ plot(sol)
 
 sol2 = diffs_constant(p_1)
 plot(sol2)
-p_2 = [Dual{Float64}(1.,1.), Dual{Float64}(1.,1.)]
+p_2 = [Dual{Float64}(1.,(1.,0.)), Dual{Float64}(1.,(0.,1.))]
 diffs_constant(p_2)
 g = ForwardDiff.gradient(diffs_constant, p_1)
 g = ForwardDiff.gradient(diffs_constant, p_2)

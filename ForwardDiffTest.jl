@@ -25,7 +25,7 @@ test(x_2)
 # ODE test: Dual + ForwardDiff
 using DifferentialEquations
 function f(du,u,p,t)
-  du[1] = (p[1]-p[2])*u[1]+p[3]
+  du[1] = (p[1]-p[2])*u[1] # Lamda
 end
 function diff_ode(p)
   prob = ODEProblem(f, [0.2], (0.0,10.0), p)
@@ -33,8 +33,13 @@ function diff_ode(p)
 end
 
 
-p_2 = [Dual{Float64}(1.,(1.,0.,0.)), Dual{Float64}(1.,(0.,1.,0.)), Dual{Float64}(1.,(0.,0.,1.))]
+p_2 = [Dual{Float64}(1.,(1.,0.)), Dual{Float64}(1.5,(0.,1.))]
 a = diff_ode(p_2)
+
+
+
+g = xx -> ForwardDiff.jacobian(diff_ode, [1.,1.]); # g = ∇f
+g(x_1)
 
 vals = []
 for i in 1:length(a.u)
