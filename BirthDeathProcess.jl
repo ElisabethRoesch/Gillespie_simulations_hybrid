@@ -1,5 +1,9 @@
 using  DiffEqBiological, Plots
 
+
+function f(du,u,p,t)
+  du[1] = 0
+end
 rs = @reaction_network begin
   c1, X --> 2X
   c2, X --> 0
@@ -12,7 +16,7 @@ u0 = [5.]
 
 # solve JumpProblem using Gillespie's Direct Method
 u0 = [5]
-dprob = DiscreteProblem(rs, u0, tspan, params)
+dprob = ODEProblem(rs, u0, tspan, params)
 jprob = JumpProblem(dprob, Direct(), rs)
 jsol = solve(jprob, SSAStepper())
 
