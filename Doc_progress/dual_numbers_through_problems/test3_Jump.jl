@@ -4,10 +4,10 @@ function diffs_variable(p)
     function f(du,u,p,t)
         du[1] = u[1]*0.0000001
     end
-    brith_rate(u,p,t) = p[1]
+    brith_rate(u,p,t) = p[1]*u[1]
     brith_affect!(integrator) = (integrator.u[1] = integrator.u[1]+1)
     brith_jump = VariableRateJump(brith_rate, brith_affect!)
-    death_rate(u,p,t) = p[2]
+    death_rate(u,p,t) = p[2]*u[1]
     death_affect!(integrator) = (integrator.u[1] = integrator.u[1]-1)
     death_jump = VariableRateJump(death_rate, death_affect!)
     prob = ODEProblem(f, convert.(eltype(p), [0.2]), (0.0,10.0), p)
