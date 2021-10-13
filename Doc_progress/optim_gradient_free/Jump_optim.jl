@@ -19,7 +19,6 @@ p_1 = [1., 1.5]
 sol_diffs = diffs_variable(p_1)
 plot(sol_diffs)
 
-sol_diffs(1.0)
 ts = Array(range(0., stop = 10, step = 0.1))
 data_raw = diffs_variable(p_1)
 data_vals = []
@@ -37,7 +36,7 @@ function loss(p)
   return sum(abs2, vals .- data_vals)
 end
 
-opt_out = optimize(loss, [1.3, 1.4], iterations = 1000)
+opt_out = optimize(loss, [1.3, 1.4], iterations = 5000)
 res = Optim.minimizer(opt_out)
 sol_res = diffs_variable(res)
 
@@ -47,8 +46,8 @@ for i in 1:101
     push!(vals, v)
 end
 
-plot(vals)
-plot!(vals)
+scatter(data_vals, label = "Data")
+    plot!(vals, label = "Prediction")
 
 
 savefig("Doc_progress/plots/optim/Jump_case.pdf")
