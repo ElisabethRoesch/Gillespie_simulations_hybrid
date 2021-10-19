@@ -38,4 +38,4 @@ plt_deriv = plot(grid = "off", xlab = "Time", legend = :outertop)
     plot!(ts, der_2, linestyle = :dash, color = :red, label = "Partial death")
 
 plot(plt_vals, plt_deriv, layout = (2,1))
-savefig("Doc_progress/plots/Jump_case.pdf")
+savefig("Doc_progress_birth_death/plots/Jump_case.pdf")

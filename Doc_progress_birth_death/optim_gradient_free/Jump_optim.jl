@@ -50,4 +50,4 @@ scatter(data_vals, label = "Data")
     plot!(vals, label = "Prediction")
 
 
-savefig("Doc_progress/plots/optim/Jump_case.pdf")
+savefig("Doc_progress_birth_death/plots/optim/Jump_case.pdf")
