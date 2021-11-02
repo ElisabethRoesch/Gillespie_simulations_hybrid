@@ -26,4 +26,4 @@ d = [sol.u[i][1] for i in 1:length(sol)]
 scatter(data)
 plot!(d)
 
-savefig("Doc_progress/plots/ODE_optim.pdf")
+savefig("Doc_progress/plots/gradient_based/ODE_optim.pdf")

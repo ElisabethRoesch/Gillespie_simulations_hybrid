@@ -6,11 +6,11 @@ end
 
 function diff_ode(p)
   prob = ODEProblem(f, [0.2], (0.0,10.0), p)
-  sol = solve(prob, Tsit5(),saveat=0.1)
+  sol = solve(prob, Tsit5(),saveat=0.4)
   return [sol.u[i][1] for i in 1:length(sol)]
 end
 
-p_1 = [1.,15.]
+p_1 = [1.,1.5]
 data = diff_ode(p_1)
 
 function loss(p)
@@ -21,7 +21,9 @@ opt_out = optimize(loss, [1.3, 1.4])
 res = Optim.minimizer(opt_out)
 
 prob = ODEProblem(f, [0.2], (0.0,10.0), res)
-sol = solve(prob, Tsit5(),saveat=0.1)
+sol = solve(prob, Tsit5(),saveat=0.4)
 d = [sol.u[i][1] for i in 1:length(sol)]
-plot(data)
+scatter(data)
 plot!(d)
+
+savefig("Doc_progress/plots/optim_gradient_free/ODE_optim.pdf")
