@@ -23,7 +23,7 @@ res = Optim.minimizer(opt_out)
 prob = ODEProblem(f, [0.2], (0.0,10.0), res)
 sol = solve(prob, Tsit5(),saveat=0.4)
 d = [sol.u[i][1] for i in 1:length(sol)]
-scatter(data)
-plot!(d)
 
-savefig("Doc_progress/plots/optim_gradient_free/ODE_optim.pdf")
+scatter(data, label = "Data")
+plot!(d, label = "Learnt")
+savefig("Doc_progress_birth_death/plots/optim_gradient_free/ODE_optim.pdf")
