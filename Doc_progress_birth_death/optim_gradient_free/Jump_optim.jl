@@ -36,7 +36,7 @@ function loss(p)
   return sum(abs2, vals .- data_vals)
 end
 
-opt_out = optimize(loss, [1.3, 1.4], iterations = 10000)
+opt_out = optimize(loss, [1.3, 1.4], iterations = 100000)
 res = Optim.minimizer(opt_out)
 sol_res = diffs_variable(res)
 
@@ -51,3 +51,8 @@ scatter(data_vals, label = "Data")
 
 
 savefig("Doc_progress_birth_death/plots/optim_gradient_free/Jump_case.pdf")
+
+a = [1,2,3]
+b = [1,2,3]
+
+a.-b
