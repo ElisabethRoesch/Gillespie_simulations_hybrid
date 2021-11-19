@@ -66,8 +66,8 @@ for i in 1:length(a.u)
   push!(vals_2, a.u[i][2].value)
   push!(vals_3, a.u[i][3].value)
   push!(vals_4, a.u[i][4].value)
-  push!(vals_5, a.u[i][4].value)
-  push!(vals_6, a.u[i][4].value)
+  push!(vals_5, a.u[i][5].value)
+  push!(vals_6, a.u[i][6].value)
 
 
   push!(der_1, a.u[i][1].partials[1])

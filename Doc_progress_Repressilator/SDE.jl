@@ -20,10 +20,11 @@ function g(du,u,p,t)
   du[4] = 0.1*u[4]
   du[5] = 0.1*u[5]
   du[6] = 0.1*u[6]
+  return du
 end
 
-function diff_ode(p)
-  prob = ODEProblem(f, [0.,2,0,1,0,3], (0.0,10.0), p)
+function diff_sde(p)
+  prob = SDEProblem(f, g, [0.,2,0,1,0,3], (0.0,10.0), p)
   solve(prob, Tsit5())
 end
 
@@ -32,7 +33,7 @@ p_2 = [ Dual{Float64}(1. ,(1., 0., 0., 0.)),
         Dual{Float64}(5. ,(0., 0., 1., 0.)),
         Dual{Float64}(1000. ,(0., 0., 0., 1.))]
 
-a = diff_ode(p_2)
+a = diff_sde(p_2)
 vals_1 = []
   vals_2 = []
   vals_3 = []
@@ -75,8 +76,8 @@ for i in 1:length(a.u)
   push!(vals_2, a.u[i][2].value)
   push!(vals_3, a.u[i][3].value)
   push!(vals_4, a.u[i][4].value)
-  push!(vals_5, a.u[i][4].value)
-  push!(vals_6, a.u[i][4].value)
+  push!(vals_5, a.u[i][5].value)
+  push!(vals_6, a.u[i][6].value)
 
 
   push!(der_1, a.u[i][1].partials[1])
@@ -162,7 +163,7 @@ plt6 = plot(grid = "off", xlab = "Time")
   plot!(a.t, der_24, linestyle = :dash, color = :orange, label = "")
 
 plot(plt1, plt2, plt3, plt4, plt5, plt6)
-savefig("Doc_progress_Repressilator/plots/ODE_case_partials_10.pdf")
+savefig("Doc_progress_Repressilator/plots/SDE_case_partials_10.pdf")
 
 plot(plt)
-savefig("Doc_progress_Repressilator/plots/ODE_case_value_10.pdf")
+savefig("Doc_progress_Repressilator/plots/SDE_case_value_10.pdf")
