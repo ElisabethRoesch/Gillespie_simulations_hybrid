@@ -51,7 +51,7 @@ p_2 = [ Dual{Float64}(p[1], (1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.)),
 
 function diff_sde(p)
   prob = SDEProblem(f, g, inits, (0.0,10.0), p)
-  solve(prob, Tsit5())
+  solve(prob, Tsit5(), saveat = 0.0:0.01:10.0)
 end
 
 a = diff_sde(p_2)
