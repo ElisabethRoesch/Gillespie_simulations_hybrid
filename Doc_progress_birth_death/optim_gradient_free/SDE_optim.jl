@@ -9,12 +9,12 @@ function g(du,u,p,t)
 end
 
 function diff_sde(p)
-  prob = SDEProblem(f, g, [0.2], (0.0,10.0), p)
-  sol = solve(prob, Tsit5(),saveat=0.4)
+  prob = SDEProblem(f, g, [2.], (0.0,10.0), p)
+  sol = solve(prob, Tsit5(),saveat=0.1)
   return [sol.u[i][1] for i in 1:length(sol)]
 end
 function diffs_sde(p)
-  n_sols = 10
+  n_sols = 100
   sols = []
   for i in 1:n_sols
     push!(sols, diff_sde(p))
@@ -39,10 +39,14 @@ function loss(p)
   end
 end
 
-opt_out = optimize(loss, [0.3, 0.4])
+opt_out = Optim.optimize(loss, [0.0, 0.0])
 res = Optim.minimizer(opt_out)
 
 sol = diffs_sde(res)
-scatter(data, label = "Data")
-plot!(sol, label = "Learnt")
+
+
+scatter(data[Array(range(1, stop = 100, step = 2))], label = "", grid = "off", xlabel = "Time", color ="grey", size = (400,300))
+  plot!(sol[Array(range(1, stop = 100, step = 2))], label = "", color = "#82B366", linewidth=3)
+  scatter!(data[Array(range(1, stop = 100, step = 2))], label = "", color ="grey")
+
 savefig("Doc_progress_birth_death/plots/optim_gradient_free/SDE_optim.pdf")

@@ -25,7 +25,7 @@ end
 
 function diff_sde(p)
   prob = SDEProblem(f, g, [0.,2,0,1,0,3], (0.0,10.0), p)
-  solve(prob, Tsit5())
+  solve(prob, Tsit5(),saveat=0.1)
 end
 
 p_2 = [ Dual{Float64}(1. ,(1., 0., 0., 0.)),
@@ -121,46 +121,66 @@ plt = plot(grid = "off", xlab = "Time")
   plot!(a.t, vals_6, label = "p_3",linestyle = :dash)
 
 
+col_purple = "#9673A6"
+col_orange = "#D79B00"
+col_green = "#82B366"
+
+
+col_yellow = "#D6B656"
+col_grey ="#666666"
+col_red = "#B85450"
+col_blue = "#6C8EBF"
+
+plt = plot(grid = "off", xlab = "Time")
+  scatter!(a.t, vals_1, label = "", color = col_purple, linewidth = 2)
+  plot!(a.t, vals_2, label = "", color = col_purple, linewidth = 2)
+  scatter!(a.t, vals_3, label = "", color = col_orange, linewidth = 2)
+  plot!(a.t, vals_4, label = "", color = col_orange, linewidth = 2)
+  scatter!(a.t, vals_5, label = "", color = col_green, linewidth = 2)
+  plot!(a.t, vals_6, label = "", color = col_green, linewidth = 2)
+
+
+
 plt1 = plot(grid = "off", xlab = "Time")
-  plot!(a.t, der_1, linestyle = :dash, color = :green, label = "")
-  plot!(a.t, der_2, linestyle = :dash, color = :red, label = "")
-  plot!(a.t, der_3, linestyle = :dash, color = :blue, label = "")
-  plot!(a.t, der_4, linestyle = :dash, color = :orange, label = "")
+plot!(a.t, der_1, color = col_yellow, label = "", linewidth = 2)
+plot!(a.t, der_2, color = col_grey, label = "", linewidth = 2)
+plot!(a.t, der_3, color = col_red, label = "", linewidth = 2)
+plot!(a.t, der_4, color = col_blue, label = "", linewidth = 2)
 
 
 plt2 = plot(grid = "off", xlab = "Time")
-  plot!(a.t, der_5, linestyle = :dash, color = :green, label = "")
-  plot!(a.t, der_6, linestyle = :dash, color = :red, label = "")
-  plot!(a.t, der_7, linestyle = :dash, color = :blue, label = "")
-  plot!(a.t, der_8, linestyle = :dash, color = :orange, label = "")
+  plot!(a.t, der_5, color = col_yellow, label = "", linewidth = 2)
+  plot!(a.t, der_6, color = col_grey, label = "", linewidth = 2)
+  plot!(a.t, der_7, color = col_red, label = "", linewidth = 2)
+  plot!(a.t, der_8, color = col_blue, label = "", linewidth = 2)
 
 
 plt3 = plot(grid = "off", xlab = "Time")
-  plot!(a.t, der_9, linestyle = :dash, color = :green, label = "")
-  plot!(a.t, der_10, linestyle = :dash, color = :red, label = "")
-  plot!(a.t, der_11, linestyle = :dash, color = :blue, label = "")
-  plot!(a.t, der_12, linestyle = :dash, color = :orange, label = "")
+  plot!(a.t, der_9, color = col_yellow, label = "", linewidth = 2)
+  plot!(a.t, der_10, color = col_grey, label = "", linewidth = 2)
+  plot!(a.t, der_11, color = col_red, label = "", linewidth = 2)
+  plot!(a.t, der_12, color = col_blue, label = "", linewidth = 2)
 
 
 plt4 = plot(grid = "off", xlab = "Time")
-  plot!(a.t, der_13, linestyle = :dash, color = :green, label = "")
-  plot!(a.t, der_14, linestyle = :dash, color = :red, label = "")
-  plot!(a.t, der_15, linestyle = :dash, color = :blue, label = "")
-  plot!(a.t, der_16, linestyle = :dash, color = :orange, label = "")
+  plot!(a.t, der_13, color = col_yellow, label = "", linewidth = 2)
+  plot!(a.t, der_14, color = col_grey, label = "", linewidth = 2)
+  plot!(a.t, der_15, color = col_red, label = "", linewidth = 2)
+  plot!(a.t, der_16, color = col_blue, label = "", linewidth = 2)
 
 
 plt5 = plot(grid = "off", xlab = "Time")
-  plot!(a.t, der_17, linestyle = :dash, color = :green, label = "")
-  plot!(a.t, der_18, linestyle = :dash, color = :red, label = "")
-  plot!(a.t, der_19, linestyle = :dash, color = :blue, label = "")
-  plot!(a.t, der_20, linestyle = :dash, color = :orange, label = "")
+  plot!(a.t, der_17, color = col_yellow, label = "", linewidth = 2)
+  plot!(a.t, der_18, color = col_grey, label = "", linewidth = 2)
+  plot!(a.t, der_19, color = col_red, label = "", linewidth = 2)
+  plot!(a.t, der_20, color = col_blue, label = "", linewidth = 2)
 
 
 plt6 = plot(grid = "off", xlab = "Time")
-  plot!(a.t, der_21, linestyle = :dash, color = :green, label = "")
-  plot!(a.t, der_22, linestyle = :dash, color = :red, label = "")
-  plot!(a.t, der_23, linestyle = :dash, color = :blue, label = "")
-  plot!(a.t, der_24, linestyle = :dash, color = :orange, label = "")
+  plot!(a.t, der_21, color = col_yellow, label = "", linewidth = 2)
+  plot!(a.t, der_22, color = col_grey, label = "", linewidth = 2)
+  plot!(a.t, der_23, color = col_red, label = "", linewidth = 2)
+  plot!(a.t, der_24, color = col_blue, label = "", linewidth = 2)
 
 plot(plt1, plt2, plt3, plt4, plt5, plt6)
 savefig("Doc_progress_Repressilator/plots/SDE_case_partials_10.pdf")
