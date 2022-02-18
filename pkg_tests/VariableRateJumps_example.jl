@@ -23,3 +23,4 @@ jump_prob = JumpProblem(prob,Direct(),jump,jump2)
 
 sol = solve(jump_prob,Tsit5())
 plot(sol)
+print("test")
